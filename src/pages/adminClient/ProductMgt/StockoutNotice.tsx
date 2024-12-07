@@ -19,7 +19,12 @@ import {
   useLoaderData,
   useSearchParams,
 } from 'react-router-dom';
-import { extractParams, getData, queryClient } from '../../../api/requests';
+import {
+  extractParams,
+  getData,
+  getOnlyData,
+  queryClient,
+} from '../../../api/requests';
 import { sortParamsSetting } from '../../../utilities/productSorting';
 import { NUM_OF_HITS } from '../../../utilities/constant';
 
@@ -28,14 +33,24 @@ const StockoutNotice = () => {
   const [allProducts, setAllProducts] = useState<ProductTypes[]>([]);
   const [searchField, setSearchField] = useState('productName');
   const [searchValue, setSearchValue] = useState('');
-  const { page, sort } = useLoaderData() as { page: number; sort: string };
+  const { page, sort, reOderLevel } = useLoaderData() as {
+    page: number;
+    sort: string;
+    reOderLevel: number;
+  };
   const [sortParams, setSortParams] = useSearchParams();
 
   const { data } = useQuery({
-    queryKey: ['fetchProduct', 'stockout', page ?? 1, sort ?? '-createdAt'],
+    queryKey: [
+      'fetchProduct',
+      'stockout',
+      page ?? 1,
+      sort ?? '-createdAt',
+      reOderLevel,
+    ],
     queryFn: () =>
       getData({
-        url: `/products?quantity[lte]=5&page=${page || 1}&sort=${
+        url: `/products?quantity[lte]=${reOderLevel}&page=${page || 1}&sort=${
           sort || '-createdAt'
         }`,
       }),
@@ -68,13 +83,18 @@ const StockoutNotice = () => {
   useEffect(() => {
     let timeOut: number | undefined;
     const filterData = async () => {
-      let newUrl = `/products?quantity[lte]=5&search=${searchField}&value=${searchValue}`;
+      let newUrl = `/products?quantity[lte]=${reOderLevel}&search=${searchField}&value=${searchValue}`;
       if (searchField !== 'productName') {
-        newUrl = `/products?quantity[lte]=5&${searchField}=${searchValue}`;
+        newUrl = `/products?quantity[lte]=${reOderLevel}&${searchField}=${searchValue}`;
       }
       timeOut = setTimeout(async () => {
         const resp = queryClientHook.fetchQuery({
-          queryKey: ['fetchProduct', 'stockoutProduct', searchValue],
+          queryKey: [
+            'fetchProduct',
+            'stockoutProduct',
+            searchValue,
+            reOderLevel,
+          ],
           queryFn: () => getData({ url: newUrl }),
         });
 
@@ -197,15 +217,29 @@ export default StockoutNotice;
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const params = extractParams(request);
   const { page, sort } = params;
+
+  const resp = await queryClient.ensureQueryData({
+    queryKey: ['setting'],
+    queryFn: () => getOnlyData({ url: '/settings' }),
+  });
+
+  const reOderLevel = resp.settings[0]?.reorderLevel;
+
   await queryClient.ensureQueryData({
-    queryKey: ['fetchProduct', 'stockout', page ?? 1, sort ?? '-createdAt'],
+    queryKey: [
+      'fetchProduct',
+      'stockout',
+      page ?? 1,
+      sort ?? '-createdAt',
+      reOderLevel,
+    ],
     queryFn: () =>
       getData({
-        url: `/products?quantity[lte]=5&page=${page || 1}&sort=${
+        url: `/products?quantity[lte]=${reOderLevel}&page=${page || 1}&sort=${
           sort || '-createdAt'
         }`,
       }),
   });
 
-  return params;
+  return { ...params, reOderLevel };
 };

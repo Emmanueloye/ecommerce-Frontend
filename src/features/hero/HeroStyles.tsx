@@ -15,13 +15,14 @@ const HeroSection = styled.section`
   }
   .image-box {
     width: 20rem;
-    height: 20rem;
+    height: 15rem;
     margin: 0 auto;
     background-color: var(--main-blue);
     border-radius: var(--rounded);
 
     img {
       object-fit: cover;
+
       z-index: 3;
     }
   }
@@ -38,6 +39,12 @@ const HeroSection = styled.section`
       margin-top: 2rem;
       text-align: center;
     }
+  }
+  .hidden {
+    display: none;
+  }
+  .show {
+    display: block;
   }
 
   @media screen and (min-width: 500px) {
@@ -80,15 +87,15 @@ const HeroSection = styled.section`
       gap: 1rem;
     }
     .image-box {
-      width: 100%;
-      height: 90%;
+      /* width: ;
+      height: 90%; */
       background-color: transparent;
       border-radius: 0;
       order: 2;
       z-index: 5;
       img {
         height: 50.2rem;
-        margin-left: -8rem;
+        margin-left: -12rem;
       }
     }
     .msg-box {

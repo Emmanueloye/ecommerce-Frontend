@@ -100,6 +100,23 @@ import AdminEditProfile, {
 import AdminPasswordChange, {
   action as passwordChangeAction,
 } from '../pages/users/AdminPasswordChange';
+import UserReport, {
+  loader as UserReportLoader,
+} from '../pages/adminClient/UserMgt/UserReport';
+import AllSliders, {
+  loader as sliderLoader,
+  action as sliderAction,
+} from '../pages/adminClient/Sliders/AllSliders';
+import AddSlider, {
+  action as addSliderAction,
+} from '../pages/adminClient/Sliders/AddSlider';
+import EditSlider, {
+  loader as editSliderLoader,
+  action as editSliderAction,
+} from '../pages/adminClient/Sliders/EditSlider';
+import ViewSlider, {
+  loader as viewSliderLoader,
+} from '../pages/adminClient/Sliders/ViewSlider';
 
 // import { loader } from '../pages/layouts/UserClientLayout';
 
@@ -164,6 +181,35 @@ const adminRoutes = [
             path: 'view/:id',
             element: <SubcategoryDetails />,
             loader: viewSubcategoryLoader,
+          },
+        ],
+      },
+
+      // sliders routes
+      {
+        path: 'sliders',
+        children: [
+          {
+            index: true,
+            element: <AllSliders />,
+            loader: sliderLoader,
+            action: sliderAction,
+          },
+          {
+            path: 'add',
+            element: <AddSlider />,
+            action: addSliderAction,
+          },
+          {
+            path: 'edit/:id',
+            element: <EditSlider />,
+            loader: editSliderLoader,
+            action: editSliderAction,
+          },
+          {
+            path: 'view/:id',
+            element: <ViewSlider />,
+            loader: viewSliderLoader,
           },
         ],
       },
@@ -261,17 +307,7 @@ const adminRoutes = [
           },
         ],
       },
-      // {
-      //   path: 'cancelled-orders',
-      //   children: [
-      //     { index: true, element: <OrderLists />, loader: orderListsLoader },
-      //     {
-      //       path: ':orderNo',
-      //       element: <AdminOrderDetails />,
-      //       loader: adminOrderDetailsLoader,
-      //     },
-      //   ],
-      // },
+
       // Review management
       {
         path: 'pending-reviews',
@@ -323,6 +359,11 @@ const adminRoutes = [
             loader: viewAdminUserLoader,
           },
         ],
+      },
+      {
+        path: 'new-users-report',
+        element: <UserReport />,
+        loader: UserReportLoader,
       },
       {
         path: 'create-admin',

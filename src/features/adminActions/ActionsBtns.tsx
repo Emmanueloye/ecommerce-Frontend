@@ -68,7 +68,7 @@ const ActionsBtns = ({
   };
 
   const handleActivate = () => {
-    const proceed = window.confirm('Are you sure you want to active?');
+    const proceed = window.confirm('Are you sure you want to activate?');
     if (proceed) {
       const formData = new FormData();
       formData.append('id', id as string);

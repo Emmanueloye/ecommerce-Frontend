@@ -21,7 +21,7 @@ const Card = styled.article`
     h5 {
       color: var(--primary-color);
       text-align: center;
-      text-transform: capitalize;
+      text-transform: uppercase;
     }
     p {
       text-align: center;

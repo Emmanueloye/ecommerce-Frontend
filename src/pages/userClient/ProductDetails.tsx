@@ -71,18 +71,20 @@ const ProductDetails = () => {
   return (
     <section style={{ paddingTop: '3rem' }}>
       <Container>
-        <TwoColumnGrid>
+        <TwoColumnGrid className='scaleIn'>
           {/* Product image */}
           <ProductImage product={product} />
           {/* Product information */}
           <ProductDetailsInfo product={product} />
         </TwoColumnGrid>
         {/* Tab */}
-        <Tab btnLabels={['description', 'add review', 'review']}>
-          {tabIndex === 0 && <DescriptionTab product={product} />}
-          {tabIndex === 1 && <ReviewTab product={product} />}
-          {tabIndex === 2 && <CustomersReviews reviews={product.reviews} />}
-        </Tab>
+        <div className='scaleIn'>
+          <Tab btnLabels={['description', 'add review', 'review']}>
+            {tabIndex === 0 && <DescriptionTab product={product} />}
+            {tabIndex === 1 && <ReviewTab product={product} />}
+            {tabIndex === 2 && <CustomersReviews reviews={product.reviews} />}
+          </Tab>
+        </div>
         {/* Related products */}
         {filteredRelatedProducts.length > 0 && (
           <ProductDisplay

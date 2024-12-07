@@ -77,7 +77,6 @@ const AllUsers = () => {
     const resp = await getData({
       url: `/users?search=${search}&value=${e.target.value}`,
     });
-    console.log(resp);
 
     if (e.target.value) {
       setAllUsers(resp.users);

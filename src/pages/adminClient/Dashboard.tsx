@@ -74,7 +74,7 @@ const Dashboard = () => {
           <DashboardCard
             title='new customers'
             icon={<FaUserAlt />}
-            url='/admin'
+            url='/admin/new-users-report'
             linkLabel={`${stats.newCustomers} ${
               stats.newCustomers > 1 ? 'users' : 'user'
             }`}

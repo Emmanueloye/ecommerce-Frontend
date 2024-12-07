@@ -19,7 +19,7 @@ export const sidebarLinks: LinksType[] = [
   {
     id: 1,
     title: 'page manager',
-    links: ['categories', 'subcategories'],
+    links: ['categories', 'subcategories', 'sliders'],
     icon: <FaBookOpen />,
   },
   {
@@ -66,7 +66,7 @@ export const sidebarLinks: LinksType[] = [
   {
     id: 6,
     title: 'user manager',
-    links: ['all users', 'users report - in dev', 'create admin'],
+    links: ['all users', 'new users report', 'create admin'],
     icon: <FaUserAlt />,
   },
 

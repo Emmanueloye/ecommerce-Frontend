@@ -261,6 +261,24 @@ const GlobalStyle = createGlobalStyle`
     }
     }
 
+    @keyframes appear {
+        from {
+            opacity:0;
+            scale: 0.5;
+            /* transform:translateX(-100); */
+        }
+        to {
+            opacity:1;
+            scale:1;
+            /* transform:translateX(0); */
+        }
+    }
+    .scaleIn {
+        animation: appear linear;
+        animation-timeline: view();
+        animation-range: entry 0% cover 31%;
+    }
+
 `;
 
 export default GlobalStyle;

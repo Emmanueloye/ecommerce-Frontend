@@ -45,7 +45,7 @@ const ProductImageWrapper = styled.article`
 
   @media screen and (min-width: 820px) {
     .product-img {
-      height: 40.7rem;
+      height: 42rem;
     }
   }
 `;

@@ -29,7 +29,11 @@ const MainProduct = ({ products }: { products: ProductTypes[] }) => {
       {products?.length > 0 ? (
         <div className='product-grid'>
           {products.map((product) => (
-            <ProductCard key={product._id} product={product} />
+            <ProductCard
+              key={product._id}
+              product={product}
+              className='scaleIn'
+            />
           ))}
         </div>
       ) : (

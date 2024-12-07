@@ -34,10 +34,20 @@ const Home = () => {
       }),
   });
 
+  const {
+    data: { sliders },
+  } = useQuery({
+    queryKey: ['fetchSlider', 'clientSlider'],
+    queryFn: () =>
+      getData({
+        url: `/sliders?sort=-createdAt&limit=3&isActive=true`,
+      }),
+  });
+
   return (
     <>
       {/* Hero section */}
-      <Hero />
+      <Hero slides={sliders} />
       {/* category section */}
       {categories.length > 1 && <Category categories={categories} />}
       {/* new arrivals section */}
@@ -75,6 +85,14 @@ export const loader = async () => {
     queryFn: () =>
       getData({
         url: `/products?quantity[gt]=0&sort=-createdAt&limit=4&isActive=true&search=appearance&value=bestSeller`,
+      }),
+  });
+
+  await queryClient.ensureQueryData({
+    queryKey: ['fetchSlider', 'clientSlider'],
+    queryFn: () =>
+      getData({
+        url: `/sliders?sort=-createdAt&limit=3&isActive=true`,
       }),
   });
 

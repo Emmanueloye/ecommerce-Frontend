@@ -33,7 +33,7 @@ export const changeToCamelCase = (str: string) => {
 export const formatDate = (date: Date) => {
   const options: Intl.DateTimeFormatOptions = {
     day: 'numeric',
-    month: 'long',
+    month: 'short',
     year: 'numeric',
   };
   const dateFormat = new Intl.DateTimeFormat('en-US', options);

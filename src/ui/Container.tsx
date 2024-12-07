@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-const Container = styled.div<{ type?: string }>`
+const Container = styled.div<{ type?: string; $padding?: boolean }>`
   max-width: 90%;
   margin: 0 auto;
 
@@ -8,6 +8,12 @@ const Container = styled.div<{ type?: string }>`
     props.type === 'relative' &&
     css`
       position: relative;
+    `}
+
+  ${(props) =>
+    props.$padding &&
+    css`
+      padding: 2rem;
     `}
 
   @media screen and (min-width: 1200px) {

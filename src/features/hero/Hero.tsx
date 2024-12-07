@@ -1,11 +1,29 @@
 import Container from '../../ui/Container';
 import LinkBtn from '../../ui/LinkBtn';
-// import img from '../../assets/images/sliderimg.png';
-// import img from '../../assets/images/nobgHair.png';
-import img from '../../assets/images/blackhair.png';
 import HeroSection from './HeroStyles';
+import { useEffect, useState } from 'react';
+import { SliderTypes } from '../../dtos/slidersDto';
 
-const Hero = () => {
+const Hero = ({ slides }: { slides: SliderTypes[] }) => {
+  const [imageIndex, setImageIndex] = useState(0);
+
+  useEffect(() => {
+    if (imageIndex < 0) {
+      setImageIndex(slides.length - 1);
+    }
+    if (imageIndex > slides.length - 1) {
+      setImageIndex(0);
+    }
+  }, [imageIndex, slides.length]);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setImageIndex(imageIndex - 1);
+    }, 5000);
+
+    return () => clearInterval(intervalId);
+  }, [imageIndex]);
+
   return (
     <HeroSection>
       <Container type='relative'>
@@ -13,15 +31,28 @@ const Hero = () => {
         <div className='circle circle-2'></div>
         <div className='grid'>
           <div className='image-box'>
-            <img src={img} alt='product image' />
+            {slides.map((item, index) => {
+              const display = index === imageIndex ? 'show' : 'hidden';
+              return (
+                <img
+                  src={item.image}
+                  key={index}
+                  className={display}
+                  alt='product image'
+                />
+              );
+            })}
           </div>
           <div className='msg-box'>
-            <h1>Luxury and affordable hair? you are at the right place</h1>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus
-              non est rerum quod odio deserunt magni assumenda, architecto
-              libero beatae?
-            </p>
+            {slides.map((item, index) => {
+              const display = index === imageIndex ? 'show' : 'hidden';
+              return (
+                <article className={display} key={index}>
+                  <h1>{item.title}</h1>
+                  <p>{item.description}</p>
+                </article>
+              );
+            })}
             <LinkBtn btnText='shop now' url='/products' type='white' />
           </div>
         </div>

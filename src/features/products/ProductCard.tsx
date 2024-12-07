@@ -7,7 +7,13 @@ import { ProductTypes } from '../../dtos/productsDto';
 import { postData } from '../../api/requests';
 import { toast } from 'react-toastify';
 
-const ProductCard = ({ product }: { product: ProductTypes }) => {
+const ProductCard = ({
+  product,
+  className,
+}: {
+  product: ProductTypes;
+  className?: string;
+}) => {
   const productName =
     product.productName?.length > 21
       ? `${product.productName.slice(0, 19)}...`
@@ -37,7 +43,7 @@ const ProductCard = ({ product }: { product: ProductTypes }) => {
   };
 
   return (
-    <Card>
+    <Card className={className}>
       <Link to={`/products/${product?.slug}/${product?._id}`}>
         <div className='card-header'>
           <img src={product?.productImage} alt='product image' />

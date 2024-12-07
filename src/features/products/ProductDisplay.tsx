@@ -12,7 +12,7 @@ const ProductDisplay = ({
   title: string;
 }) => {
   return (
-    <section style={{ marginTop: '8rem' }}>
+    <section className='scaleIn' style={{ marginTop: '8rem' }}>
       <Container>
         <Heading title={title} />
 

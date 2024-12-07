@@ -57,9 +57,7 @@ const Products = () => {
     queryKey: ['fetchProduct', 'products', page ?? 1],
     queryFn: () =>
       getData({
-        url: `/products?quantity[gt]=0&isActive=true&page=${
-          page || 1
-        }&limit=12`,
+        url: `/products?quantity[gt]=0&isActive=true&page=${page || 1}&limit=9`,
       }),
   });
 
@@ -107,7 +105,7 @@ const Products = () => {
           {/* Main product grid */}
           <MainProduct products={products} />
         </GridWrapper>
-        {totalPages > 1 && data.noHits >= 12 && (
+        {totalPages > 1 && (
           <Pagination
             totalPages={totalPages}
             currentPage={currentPage}
@@ -133,9 +131,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     queryKey: ['fetchProduct', 'products', page ?? 1],
     queryFn: () =>
       getData({
-        url: `/products?quantity[gt]=0&isActive=true&page=${
-          page || 1
-        }&limit=12`,
+        url: `/products?quantity[gt]=0&isActive=true&page=${page || 1}&limit=9`,
       }),
   });
 

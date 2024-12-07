@@ -7,7 +7,7 @@ import { CategoriesType } from '../../dtos/categoriesDto';
 
 const Category = ({ categories }: { categories: CategoriesType[] }) => {
   return (
-    <SectionWrapper $bg={img} $grid={categories.length}>
+    <SectionWrapper className='scaleIn' $bg={img} $grid={categories.length}>
       <Container>
         {/* <ProfileHeader>Product categories</ProfileHeader> */}
         <Heading title='Product categories' />

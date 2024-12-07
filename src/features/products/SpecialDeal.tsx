@@ -25,7 +25,7 @@ const DealSectionWrapper = styled.section<{ $bg?: string }>`
 
 const SpecialDeal = () => {
   return (
-    <DealSectionWrapper $bg={bg}>
+    <DealSectionWrapper className='scaleIn' $bg={bg}>
       <Container>
         <div className='grid'>
           <ProductDealsCard type='withImage' url='/products/special-offer' />

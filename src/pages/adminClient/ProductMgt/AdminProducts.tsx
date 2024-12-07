@@ -43,7 +43,12 @@ const AdminProducts = () => {
   const [sortParams, setSortParams] = useSearchParams();
 
   const { data } = useQuery({
-    queryKey: ['fetchProduct', 'products', page ?? 1, sort ?? '-createdAt'],
+    queryKey: [
+      'fetchProduct',
+      'Adminproducts',
+      page ?? 1,
+      sort ?? '-createdAt',
+    ],
     queryFn: () =>
       getData({
         url: `/products?page=${page || 1}&sort=${sort || '-createdAt'}`,
@@ -83,7 +88,7 @@ const AdminProducts = () => {
       }
       timeOut = setTimeout(async () => {
         const resp = queryClientHook.fetchQuery({
-          queryKey: ['fetchProduct', 'product', searchValue],
+          queryKey: ['fetchProduct', 'Adminproducts', searchValue],
           queryFn: () => getData({ url: newUrl }),
         });
 
@@ -221,7 +226,12 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const params = extractParams(request);
   const { page, sort } = params;
   await queryClient.ensureQueryData({
-    queryKey: ['fetchProduct', 'products', page ?? 1, sort ?? '-createdAt'],
+    queryKey: [
+      'fetchProduct',
+      'Adminproducts',
+      page ?? 1,
+      sort ?? '-createdAt',
+    ],
     queryFn: () =>
       getData({
         url: `/products?page=${page || 1}&sort=${sort || '-createdAt'}`,
